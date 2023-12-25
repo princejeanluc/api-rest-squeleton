@@ -1,11 +1,17 @@
 import { Sequelize } from 'sequelize';
 import { sequelize as sequelizeConfig } from '../../config';
 
-const sequelize = new Sequelize(sequelizeConfig.database, sequelizeConfig.username, sequelizeConfig.password, {
-  host: sequelizeConfig.host,
-  dialect: sequelizeConfig.dialect,
-  // Autres options de configuration de Sequelize si nécessaire
-});
+
+let conf = {
+    host: sequelizeConfig.host,
+    dialect: sequelizeConfig.dialect,
+    username:sequelizeConfig.username,
+    password:  sequelizeConfig.password, 
+    database:sequelizeConfig.database,
+  
+  }
+console.log(conf)
+const sequelize = new Sequelize(conf);
 
 sequelize.authenticate()
   .then(() => {

@@ -1,0 +1,77 @@
+{
+  "name": "querymen",
+  "version": "2.1.4",
+  "description": "Querystring parser middleware for MongoDB, Express and Nodejs",
+  "main": "dist/index.js",
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "eslint src test",
+    "check": "npm run lint -s && dependency-check package.json --entry src",
+    "watch": "watch 'npm run build' src test",
+    "test": "babel-node test/index.js | tspec",
+    "prebuild": "npm run check -s && npm run clean -s",
+    "build": "babel --optional runtime src -d dist",
+    "postbuild": "npm run test -s",
+    "coverage": "nyc --reporter=lcov --reporter=text npm run test",
+    "coveralls": "npm run coverage -s && coveralls < coverage/lcov.info",
+    "postcoveralls": "rimraf ./coverage",
+    "prepublish": "npm run build -s",
+    "deploy": "git pull --rebase origin master && git push origin master",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish",
+    "postpublish": "git push origin master --follow-tags",
+    "toc": "doctoc --github --title \"# Changelog\" CHANGELOG.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegohaz/querymen.git"
+  },
+  "keywords": [
+    "mongo",
+    "express",
+    "node",
+    "query",
+    "querystring",
+    "param",
+    "mongodb",
+    "expressjs",
+    "nodejs"
+  ],
+  "author": "Diego Haz <hazdiego@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diegohaz/querymen/issues"
+  },
+  "homepage": "https://github.com/diegohaz/querymen#readme",
+  "devDependencies": {
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.7.6",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-es2015": "^6.6.0",
+    "blue-tape": "^1.0.0",
+    "coveralls": "^2.11.12",
+    "dependency-check": "^2.6.0",
+    "doctoc": "^1.2.0",
+    "eslint": "^3.14.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.7.8",
+    "nyc": "^11.0.1",
+    "rimraf": "^2.5.4",
+    "supertest": "^3.0.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.0",
+    "watch": "^1.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.11.1",
+    "rich-param": "^1.0.1"
+  }
+}

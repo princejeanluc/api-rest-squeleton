@@ -1,9 +1,9 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes,Model} from 'sequelize';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-import { sequelize } from '../../config'; // Assurez-vous d'importer votre instance sequelize depuis le fichier de configuration
-
+import sequelize from '../../services/sequelize';   
 const roles = ['user', 'admin'];
+
 
 class User extends Model {
   // Vous pouvez ajouter des méthodes spécifiques à votre modèle ici
@@ -102,4 +102,7 @@ User.beforeSave((user, options) => {
   return user.email;
 });
 
+
+
 export default User;
+

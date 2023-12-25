@@ -1,6 +1,5 @@
-import path from 'path';
-import merge from 'lodash/merge';
-
+const path = require('path')
+const merge = require('lodash/merge')
 /* istanbul ignore next */
 const requireProcessEnv = (name) => {
   if (!process.env[name]) {
@@ -13,6 +12,7 @@ const requireProcessEnv = (name) => {
 if (process.env.NODE_ENV !== 'production') {
   const dotenv = require('dotenv-safe');
   dotenv.config({
+    allowEmptyValues:true,
     path: path.join(__dirname, '../.env'),
     example: path.join(__dirname, '../.env.example')
   });
