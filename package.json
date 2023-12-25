@@ -1,0 +1,29 @@
+{
+  "name": "api-rest-squeleton",
+  "version": "1.0.0",
+  "description": "this is based skeleton project for rest api project working with sequelize",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/princejeanluc/api-rest-squeleton.git"
+  },
+  "keywords": [
+    "express",
+    "sequelize",
+    "starter",
+    "api",
+    "rest"
+  ],
+  "author": "prince jean luc de nteppe",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/princejeanluc/api-rest-squeleton/issues"
+  },
+  "homepage": "https://github.com/princejeanluc/api-rest-squeleton#readme"
+}
