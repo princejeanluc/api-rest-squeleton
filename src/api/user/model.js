@@ -23,6 +23,9 @@ class User extends Model {
   }
 
   authenticate(password) {
+    console.log(password)
+    console.log("-------in User Model----------")
+    console.log(this.password)
     return bcrypt.compare(password, this.password).then((valid) => (valid ? this : false));
   }
 }
@@ -82,8 +85,8 @@ User.beforeSave(async (user, options) => {
   const rounds = process.env.NODE_ENV === 'test' ? 1 : 9;
 
   try {
-    const hash = await bcrypt.hash(user.password, rounds);
-    user.password = hash;
+    const hash = await bcrypt.hash(toString(user.password), rounds);
+    user.dataValues.password = hash;
   } catch (error) {
     throw error;
   }
@@ -91,7 +94,7 @@ User.beforeSave(async (user, options) => {
 
 User.beforeSave((user, options) => {
   if (!user.picture || user.picture.indexOf('https://gravatar.com') === 0) {
-    const hash = crypto.createHash('md5').update(user.email).digest('hex');
+    const hash = crypto.createHash('md5').update(toString(user.email)).digest('hex');
     user.picture = `https://gravatar.com/avatar/${hash}?d=identicon`;
   }
 
@@ -99,7 +102,7 @@ User.beforeSave((user, options) => {
     user.name = user.email.replace(/^(.+)@.+$/, '$1');
   }
 
-  return user.email;
+  return toString(user.email);
 });
 
 

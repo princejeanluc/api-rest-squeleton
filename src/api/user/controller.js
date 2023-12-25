@@ -1,5 +1,5 @@
 import { success, notFound } from '../../services/response/';
-import { User } from '.';
+import User  from './model';
 import { sign } from '../../services/jwt';
 
 export const index = async ({ querymen: { query, select, cursor } }, res, next) => {
@@ -35,6 +35,7 @@ export const showMe = ({ user }, res) => {
 
 export const create = async ({ bodymen: { body } }, res, next) => {
   try {
+    console.log(body)
     const user = await User.create(body);
     const token = await sign(user.id);
     success(res, 201)({ token, user: user.view(true) });

@@ -2,10 +2,10 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { jwtSecret } from '../../config';
+import { jwtSecret,masterKey } from '../../config';
 import User from '../../api/user/model'; 
 
-
+console.log(masterKey)
 export const password = () => (req, res, next) =>
   passport.authenticate('password', { session: false }, (err, user, info) => {
     if (err && err.param) {
@@ -22,7 +22,7 @@ export const password = () => (req, res, next) =>
 export const master = () =>
   passport.authenticate('master', { session: false });
 
-export const token = ({ required, roles = User.rawAttributes.role.values } = {}) => (req, res, next) =>
+export const token = ({ required, roles = User.getAttributes().role.values } = {}) => (req, res, next) =>
   passport.authenticate('token', { session: false }, (err, user, info) => {
     if (err || (required && !user) || (required && !roles.includes(user.role))) {
       return res.status(401).end();

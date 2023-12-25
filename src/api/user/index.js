@@ -6,7 +6,7 @@ import { index, showMe, show, create, update, updatePassword, destroy } from './
 import  User  from './model';
 
 const router = new Router();
-const { email, password, name, picture, role } = User.rawAttributes;
+const { email, password, name, picture, role } = User.getAttributes();
 
 /**
  * @api {get} /users Retrieve users
